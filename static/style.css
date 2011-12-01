@@ -1,0 +1,150 @@
+body {
+	font-family: helvetica neue,arial;
+	font-size: 70%;
+	color: #333; 
+	margin: 3em;
+}
+
+h1,h2,h3 {
+	font-family: rokkitt;
+	color: #369;
+}
+
+#lightbox-form label {
+	font: 2.5em rokkitt;
+	color: #369;
+	margin-right: 0.2em;
+}
+
+#lightbox-form {
+	margin: 0 auto;
+	width: 520px;
+}
+
+#lightbox-form input {
+	font: 2em helvetica neue, arial;
+	border-radius: 3px;
+}
+
+#lightbox-form button {
+	background-color: #184587;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#2E82FF,),to(#184587));
+	background-image: -webkit-linear-gradient(top,#2E82FF,#184587);
+	background-image: -moz-linear-gradient(top,#2E82FF,#184587);
+	background-image: -ms-linear-gradient(top,#2E82FF,#184587);
+	background-image: -o-linear-gradient(top,#2E82FF,#184587);
+	background-image: linear-gradient(top,#2E82FF,#184587);
+	display: inline-block;
+	border: 1px solid #184587;
+	border-radius: 3px;
+	color: white;
+	margin: 2px;
+	padding: 0.4em 2em;
+	vertical-align: top;
+	font: bold 1.3em helvetica neue,microsoft sans serif,arial;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #111;
+	box-shadow: 0 0 5px 1px #184587 inset,0 2px 0 rgba(0,0,0,.3);
+	cursor: pointer;	
+}
+
+.col {
+	float: left;
+	margin: 20px 50px 100px 0;
+	width: 400px;
+	overflow: hideen;
+}
+
+.intro {
+	margin-bottom: 2em;
+}
+
+ol {
+	margin-bottom: 2em;
+	padding-left: 1.8em;
+	font-size: 1.2em;
+}
+
+ol li {
+	margin-bottom: 0.3em;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	width: auto;
+	overflow: hidden;
+}
+
+ul li {
+	float: left;
+	margin: 0;
+}
+
+#row-slider-pos {
+	font: 1.5em rokkitt;
+	margin-bottom: 0.5em;
+}
+
+#row-slider-pos span {
+	color: #369;
+}
+
+#lightbox-row-slider {
+	clear: both;
+	font-size: 1.5em;
+	width: 400px;
+}
+
+#lightbox {
+	width: 400px;
+	border: 1px solid #999;
+	border-radius: 4px;
+}
+
+#lightbox h3 {
+	font: 1.4em rokkitt;
+	color: #333;
+	margin: 8px 4px 0 8px;
+	padding: 0;
+	text-transform: uppercase;
+}
+
+#lightbox ul {
+	margin: 4px;
+}
+
+#lightbox li {
+	border: 1px solid #eee;
+	margin: 3px;
+	/* box-shadow: 0 0 3px #999; */
+}
+
+#lightbox li div {
+	width: 70px;
+	height: 70px;
+	margin: 0;
+	background-position: center;
+}
+
+#thumbs h2 {
+	padding: 0;
+	margin: 5px 0;
+}
+
+#thumbs li {
+	margin: 0 10px 10px 0;
+}
+
+#thumbs textarea {
+	clear: both;
+	display: block;
+	width: 100%;
+	height: 300px;
+	padding: 5px;
+	color: #f30;
+	background-color: #eee;
+}
+

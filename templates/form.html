@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+	<form id="lightbox-form">
+		<label for="lightbox-id">Lightbox Id:</label>
+		<input id="lightbox-id" name="lightbox-id">
+		<button>Submit</button>
+	</form>
+{% endblock %}
+{% block script %}
+<script>
+	$(function(){
+		$('form button').on('click', function(e){
+			e.preventDefault();
+			var lightboxId = $('#lightbox-id').val();
+			location.href = '/output/' + lightboxId;
+		});
+	});
+</script>
+{% endblock %}

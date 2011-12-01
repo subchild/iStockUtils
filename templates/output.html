@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<div class="col" id="col-a">
+		<div class="intro">
+			<h1>Lightbox Link Image</h1>
+			<ol>
+				<li>Sort photos by dragging thumbs into place.</li>
+				<li>Drag slider to change number of rows.</li>
+				<li>Capture image and post to iStockPhoto linked to your lightbox.</li>
+			</ol>
+			<div id="row-slider-pos">Thumb Rows: <span></span></div>
+			<div id="lightbox-row-slider"></div>	
+		</div>
+		<div id="lightbox">
+			<h3>{{ name }}</h3>
+			<ul id="lightbox-thumbs">
+			{% for thumb in thumbs %}
+				<li data-id="{{ thumb.id }}" data-ubb="{{ thumb.ubb }}"><div style="background-image:url({{ thumb.src }});"></div></li>
+			{% endfor %}
+			</ul>
+		</div>
+		<button id="generate-image">Generate Image</button>
+	</div>
+	<div class="col">
+		<div class="intro">
+			<h1>Individual Thumbnails</h1>
+		</div>
+		<div id="thumbs">
+			<p>Edit and sort, then copy/paste the UBB code.</p>
+			{% if thumbs %}
+				<ul id="individual-thumbs">
+				{% for thumb in thumbs %}
+					<li data-id="{{ thumb.id }}" data-ubb="{{ thumb.ubb }}"><a href="http://www.istockphoto.com/file_closeup_edit.php?id={{ thumb.id }}" target="_blank"><img src="{{ thumb.src }}"></a></li>	
+				{% endfor %}
+				</ul>
+			{% else %}
+				This Lightbox is empty.  
+			{% endif %}
+			<textarea>{{ ubbstring }}</textarea>
+		</div>	
+	</div>
+{% endblock %}
+{% block script %}
+	<script>
+		$(function(){
+			var $lightboxThumbs = $("#lightbox-thumbs"),
+				thumbsPerRow    = 5,
+				rows            = Math.floor($lightboxThumbs.find("li").size()/thumbsPerRow),
+				step            = 100/rows;
+			$lightboxThumbs.sortable();
+			$("#individual-thumbs").sortable({
+				opacity: 0.5,
+				update: function(event, ui){
+					// update UBB	
+					var ubb = '';
+					$(ui.item).parent().children().each(function(i, el){
+						ubb += $(el).attr('data-ubb');
+					});
+					$('textarea').val(ubb);
+				}
+			});
+			$("#lightbox-row-slider").slider({
+				step  : step, 
+				value : rows*step,
+				stop  : function(event, ui){
+					var rowsToShow = ui.value/step;
+					$lightboxThumbs
+						.find("li") .show().end()
+						.find("li:gt(" + ((rowsToShow*thumbsPerRow) + thumbsPerRow-1) + ")").hide();
+					$("#row-slider-pos span").text(rowsToShow+1);
+				}
+			});
+			$("#row-slider-pos span").text(rows+1);
+			$("#generate-image").on("click", function(){
+				$("#lightbox").html2canvas({renderViewport:'true'});
+				setTimeout(function(){
+					console.log($("canvas")[0].toDataURL());
+				}, 3000);
+			});
+		});
+	</script>
+{% endblock %}

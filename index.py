@@ -7,15 +7,15 @@ from Image import Image
 
 app = Flask(__name__)
 
-# index page with input form
 @app.route("/")
 def index():
+	'index page with input form'
 	return render_template('form.html')
 
 
-# output
 @app.route('/output/<id>')
 def output(id):
+	'outputs page with lightbox image and related photos'
 	ubbstr = ''
 	thumbs = []
 	file_handle = urllib.urlopen('http://www.istockphoto.com/search/lightbox/' + id)
@@ -40,10 +40,10 @@ def output(id):
 	return render_template('output.html', name=name, thumbs=thumbs, ubbstring=ubbstr)
 
 
-# proxy service for exposing istock lightbox html to local origin (ajax) requests
-# @TODO move this to Image objet and call it from output method above
 @app.route('/get/lightbox/<id>')
 def get_lightbox(id):
+	'proxy servie for exposing istock lightbox html to local origin for ajax requests'
+	'@TODO move this to Image object and call it from output method above'
 	file_handle = urllib.urlopen('http://www.istockphoto.com/search/lightbox/' + id)
 	file_contents = file_handle.read()
 	file_handle.close()

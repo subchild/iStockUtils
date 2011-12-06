@@ -10,6 +10,11 @@ h1,h2,h3 {
 	color: #369;
 }
 
+h1 {
+	font-size: 4em;
+	letter-spacing: -0.08em;
+}
+
 #lightbox-form label {
 	font: 2.5em rokkitt;
 	color: #369;

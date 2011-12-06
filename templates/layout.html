@@ -1,7 +1,10 @@
 <!doctype html>
-<title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Rokkitt:700">
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Rokkitt:700">
+</head>
 <body>
 	{% block content %}{% endblock %}
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
@@ -10,3 +13,4 @@
 	<script src="http://html2canvas.hertzen.com/build/jquery.plugin.html2canvas.js"></script>
 	{% block script %}{% endblock %}
 </body>
+</html>

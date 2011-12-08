@@ -14,6 +14,13 @@ body {
 	margin: 0.1em 0;
 }
 
+#content {
+	width: 900px;
+	padding: 20px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
 h1,h2,h3 {
 	font-family: rokkitt;
 	color: #369;
@@ -98,23 +105,18 @@ ul li {
 	margin: 0;
 }
 
-#row-slider-pos {
+.slider-label {
 	font: 1.5em rokkitt;
 	margin-bottom: 0.5em;
+	width: 400px;
+	clear: both;
 }
 
-#row-slider-pos span {
+.slider-label span {
 	color: #369;
 }
 
-#lightbox-row-slider {
-	clear: both;
-	font-size: 1.5em;
-	width: 400px;
-}
-
 #lightbox {
-	width: 400px;
 	border: 1px solid #999;
 	border-radius: 4px;
 }
@@ -128,7 +130,7 @@ ul li {
 }
 
 #lightbox ul {
-	margin: 4px;
+	margin: 3px;
 }
 
 #lightbox li {
@@ -153,13 +155,16 @@ ul li {
 	margin: 0 10px 10px 0;
 }
 
-#thumbs textarea {
+textarea {
+	font: 10px monospace;
 	clear: both;
 	display: block;
 	width: 100%;
-	height: 300px;
-	padding: 5px;
-	color: #f30;
+	height: 100px;
+	padding: 0;
+	margin-top: 20px;
+	border: 1px solid #666;
+	color: #666;
 	background-color: #eee;
 }
 

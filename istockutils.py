@@ -6,6 +6,13 @@ from Image import Image
 
 app = Flask(__name__)
 
+def get_lightbox_source(id):
+	'''Returns source of iStockphoto's lightbox page for passed id'''
+	file_handle = urllib.urlopen('http://www.istockphoto.com/search/lightbox/' + id)
+	file_contents = file_handle.read()
+	file_handle.close()
+	return file_contents
+
 
 @app.route("/favicon.ico")
 def favicon():
@@ -15,18 +22,16 @@ def favicon():
 
 @app.route("/")
 def index():
-	'index page with input form'
+	'''Renders index page with input form'''
 	return render_template('form.html')
 
 
 @app.route('/output/<id>')
 def output(id):
-	'outputs page with lightbox image and related photos'
+	'''Renders output page with lightbox image and related photos'''
 	ubbstr = ''
 	thumbs = []
-	file_handle = urllib.urlopen('http://www.istockphoto.com/search/lightbox/' + id)
-	file_contents = file_handle.read()
-	file_handle.close()
+	file_contents = get_lightbox_source(id)
 	exp_imgs = re.compile(r"file_thumbview_approve\\\/(\d+)\\\/")
 	match = re.search(r"\| Lightbox: ([\b\w\s\b]+) ", file_contents)
 	if match:
@@ -48,11 +53,8 @@ def output(id):
 
 @app.route('/get/lightbox/<id>')
 def get_lightbox(id):
-	'proxy servie for exposing istock lightbox html to local origin for ajax requests'
-	'@TODO move this to Image object and call it from output method above'
-	file_handle = urllib.urlopen('http://www.istockphoto.com/search/lightbox/' + id)
-	file_contents = file_handle.read()
-	file_handle.close()
+	'''Proxy service for exposing istock lightbox html to local origin for ajax requests'''
+	file_contents = get_lightbox_src(id)
 	exp = re.compile(r"file_thumbview_approve\\\/(\d+)\\\/")
 	img_ids = exp.findall(file_contents)
 	return img_ids[2]

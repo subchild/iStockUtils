@@ -21,7 +21,7 @@ class Image:
 
 	def get_ubb_string(self):
 		delimiter = ' '
-		url_detail = '/file_closeup_edit.php?id='
+		url_detail = '/file_closeup.php?id='
 		ubb	  = "[url=" + self.url_istock + url_detail + self.id + "]"
 		ubb  +=	"[img]" + self.get_thumb_src() + "[/img]"
 		ubb  += "[/url]"

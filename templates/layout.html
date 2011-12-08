@@ -3,9 +3,10 @@
 <head>
 	<title>{% block title %}{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Rokkitt:700">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Rokkitt:700|Ultra">
 </head>
 <body>
+	<div id="logo">iStockutils</div>
 	{% block content %}{% endblock %}
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="{{ url_for('static', filename='jquery-ui-1.8.16.custom.min.js') }}"></script>

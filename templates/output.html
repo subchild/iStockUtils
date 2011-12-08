@@ -48,18 +48,11 @@
 				thumbsPerRow    = 5,
 				rows            = Math.floor($lightboxThumbs.find("li").size()/thumbsPerRow),
 				step            = 100/rows;
-			$lightboxThumbs.sortable();
-			$("#individual-thumbs").sortable({
-				opacity: 0.5,
-				update: function(event, ui){
-					// update UBB	
-					var ubb = '';
-					$(ui.item).parent().children().each(function(i, el){
-						ubb += $(el).attr('data-ubb');
-					});
-					$('textarea').val(ubb);
-				}
+		
+			$lightboxThumbs.sortable({
+				opacity: 0.5	
 			});
+			
 			$("#lightbox-row-slider").slider({
 				step  : step, 
 				value : rows*step,
@@ -72,11 +65,24 @@
 				}
 			});
 			$("#row-slider-pos span").text(rows+1);
+
 			$("#generate-image").on("click", function(){
 				$("#lightbox").html2canvas({renderViewport:'true'});
 				setTimeout(function(){
 					console.log($("canvas")[0].toDataURL());
 				}, 3000);
+			});
+			
+			$("#individual-thumbs").sortable({
+				opacity: 0.5,
+				update: function(event, ui){
+					// update UBB	
+					var ubb = '';
+					$(ui.item).parent().children().each(function(i, el){
+						ubb += $(el).attr('data-ubb');
+					});
+					$('textarea').val(ubb);
+				}
 			});
 		});
 	</script>

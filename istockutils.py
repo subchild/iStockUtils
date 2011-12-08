@@ -37,7 +37,7 @@ def output(id):
 	ids = list(set(ids)) # dedupe
 	for id in ids:
 		i = Image(None, None, None, id)
-		ubbstr += i.get_ubb_string()
+		ubbstr += i.get_ubb_string() + ' '
 		thumbs.append({
 			'id'  : id, 
 			'src' : i.get_thumb_src(), 

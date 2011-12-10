@@ -48,7 +48,7 @@ def output(id):
 			'src' : i.get_thumb_src(), 
 			'ubb' : i.get_ubb_string()
 		})
-	return render_template('output.html', name=name, thumbs=thumbs, ubbstring=ubbstr)
+	return render_template('output.html', id=id, name=name, thumbs=thumbs, ubbstring=ubbstr)
 
 
 @app.route('/get/lightbox/<id>')

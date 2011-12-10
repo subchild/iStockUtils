@@ -6,7 +6,10 @@ $(function(){
 		lightboxStep    = 100/lightboxRows,
 
 		$indiThumbs = $("#individual-thumbs"),
-		thumbsStep  = 100/totalThumbs;
+		thumbsStep  = 100/totalThumbs,
+
+		lightboxId      = $("#lightbox").attr("data-lightbox-id"),
+		lightboxUrlRoot = "http://istockphoto.com/search/lightbox/";
 		
 	$lightboxThumbs.sortable({
 		opacity: 0.5	
@@ -30,11 +33,16 @@ $(function(){
 				.find("li").show().end()
 				.find("li:gt(" + thumbsToShow + ")").hide();
 			$("body").trigger('slider-lightbox-updated', rowsToShow+1);
-//			$("#slider-label-lightbox-rows span").text(rowsToShow+1);
 		}
 	});
 	$("body").trigger('slider-lightbox-updated', lightboxRows+1);
-//	$("#slider-label-lightbox-rows span").text(lightboxRows+1);
+
+
+	$("#lightbox-ubb")
+		.val("[url="+ lightboxUrlRoot + lightboxId +"][img]IMAGESRC[/img][/url]")
+		.on("click", function(){
+			// @TODO Highlight word IMAGESRC
+		});
 
 
 	/**	
@@ -50,22 +58,25 @@ $(function(){
 	});
 
 
+	$("body").bind("indi-thumbs-updated", function(){
+		var ubb = '';
+		$indiThumbs.children(":visible").each(function(i, el){
+			ubb += $(el).attr('data-ubb');
+		});
+		$('#thumbs-ubb').val(ubb);
+	});
+
+
 	$("#individual-thumbs").sortable({
 		opacity: 0.5,
 		update: function(event, ui){
-			// update UBB	
-			var ubb = '';
-			$(ui.item).parent().children().each(function(i, el){
-				ubb += $(el).attr('data-ubb');
-			});
-			$('#thumbs-ubb').val(ubb);
+			$("body").trigger("indi-thumbs-updated");
 		}
 	});
 
 	/**
 	 * @TODO Prevent zero
 	 * @TODO Fix largest value
-	 * @TODO Adjust UBB value - make separate method
 	 */
 	$("#slider-thumb-count").slider({
 		step  : thumbsStep,
@@ -75,9 +86,11 @@ $(function(){
 			$indiThumbs
 				.find("li").show().end()
 				.find("li:gt(" + thumbsToShow + ")").hide();
+			$("body").trigger("indi-thumbs-updated");
 			$("#slider-label-thumb-count span").text(thumbsToShow + 1);
 		}
 	});
+
 	$("#thumbs-ubb").on("click", function(){
 		$(this).get(0).select();
 	});

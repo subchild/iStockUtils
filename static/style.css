@@ -2,21 +2,29 @@ body {
 	font-family: helvetica neue,arial;
 	font-size: 70%;
 	color: #333; 
+	margin: 0;
+}
+
+#header {
+	background: rgb(220,220,220); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(220,220,220,1) 0%, rgba(190,190,190,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(220,220,220,1)), color-stop(100%,rgba(190,190,190,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(190,190,190,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(190,190,190,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(190,190,190,1) 100%); /* IE10+ */
+	background: linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(190,190,190,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdcdc', endColorstr='#bebebe',GradientType=0 ); /* IE6-9 */
 }
 
 #logo {
-	font: 10em/0 Ultra;
-	color: #eee;
+	font: 10em/0.6em Ultra;
+	letter-spacing: -0.04em;
+	color: #fff;
 	text-align: center;
-	position: absolute;
-	z-index: -1;
-	width: 93%;
-	margin: 0.1em 0;
 }
 
 #content {
 	width: 900px;
-	padding: 20px;
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -34,7 +42,6 @@ h1 {
 #lightbox-form {
 	margin: 3em auto;
 	width: 545px;
-	opacity: 0.8;
 }
 
 #lightbox-form label {
@@ -73,9 +80,13 @@ h1 {
 
 .col {
 	float: left;
-	margin: 20px 50px 100px 0;
+	padding: 25px;
 	width: 400px;
-	overflow: hideen;
+	overflow: hidden;
+}
+
+.col h1 {
+	text-align: center;
 }
 
 .intro {

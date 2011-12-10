@@ -7,13 +7,13 @@
 			<h1>Lightbox Link Image</h1>
 			<ol>
 				<li>Sort photos by dragging thumbs into place.</li>
-				<li>Drag slider to change number of rows.</li>
+				<li>Drag slider to change number of rows. (Arrow keys work!)</li>
 				<li>Save graphic, upload and paste UBB to iStockPhoto photo description.</li>
 			</ol>
 			<div id="slider-label-lightbox-rows" class="slider-label">Thumb Rows: <span></span></div>
 			<div id="slider-lightbox-rows"></div>	
 		</div>
-		<div id="lightbox">
+		<div id="lightbox" data-lightbox-id="{{ id }}">
 			<h3>{{ name }}</h3>
 			<ul id="lightbox-thumbs">
 			{% for thumb in thumbs %}
@@ -22,6 +22,7 @@
 			</ul>
 		</div>
 		<textarea id="lightbox-ubb"></textarea>
+		<p>Replace <b>IMAGESRC</b> with the URL of the saved graphic.</p>
 		<!-- <button id="generate-image">Generate Image</button> -->
 	</div>
 
@@ -30,7 +31,7 @@
 			<h1>Individual Thumbnails</h1>
 			<ol>
 				<li>Sort photos by dragging thumbs into place.</li>
-				<li>Drag slider to change number of thumbs.</li>
+				<li>Drag slider to change number of thumbs. (Arrow keys work!)</li>
 				<li>Copy UBB code below then paste into iStockPhoto photo description.</li>
 			</ol>
 			<div id="slider-label-thumb-count" class="slider-label">Thumbnails: <span></span></div>

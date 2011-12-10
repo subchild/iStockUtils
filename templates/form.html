@@ -4,6 +4,12 @@
 		<label for="lightbox-id">Lightbox Id:</label>
 		<input id="lightbox-id" name="lightbox-id">
 		<button>Submit</button>
+		<p>
+			Drop in a valid iStockphoto lightbox id and watch what happens.<br/> 
+			Here are some to get you going:<br/>
+			<a href="/output/11329018">11329018</a>, <a href="/output/11260736">11260736</a>, 
+			<a href="/output/1936426">1936426</a>, <a href="/output/2967389">2967389</a>
+		</p>
 	</form>
 {% endblock %}
 {% block script %}
@@ -12,7 +18,12 @@
 		$('form button').on('click', function(e){
 			e.preventDefault();
 			var lightboxId = $('#lightbox-id').val();
-			location.href = '/output/' + lightboxId;
+			if (lightboxId){
+				location.href = '/output/' + lightboxId;
+			}
+			else {
+				alert("No id == No idea.");
+			}
 		});
 	});
 </script>

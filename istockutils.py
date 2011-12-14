@@ -40,11 +40,11 @@ def output(id):
 		name = "Lightbox Name Goes Here"
 	ids = exp_imgs.findall(file_contents)
 	ids = list(set(ids)) # dedupe
-	for id in ids:
-		i = Image(None, None, None, id)
+	for image_id in ids:
+		i = Image(None, None, None, image_id)
 		ubbstr += i.get_ubb_string() + ' '
 		thumbs.append({
-			'id'  : id, 
+			'id'  : image_id, 
 			'src' : i.get_thumb_src(), 
 			'ubb' : i.get_ubb_string()
 		})

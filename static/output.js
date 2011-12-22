@@ -10,7 +10,7 @@ $(function(){
 
 		lightboxId      = $("#lightbox").attr("data-lightbox-id"),
 		lightboxUrlRoot = "http://istockphoto.com/search/lightbox/";
-		
+	
 	$lightboxThumbs.sortable({
 		opacity: 0.5	
 	});
@@ -18,7 +18,16 @@ $(function(){
 	$("body")
 		.bind("slider-lightbox-updated", function(event, count){
 			$("#slider-label-lightbox-rows span").text(count);
+		})
+		.bind("indi-thumbs-updated", function(event, count){
+			var ubb = '';
+			$indiThumbs.children(":visible").each(function(i, el){
+				ubb += $(el).attr('data-ubb');
+			});
+			$('#thumbs-ubb').val(ubb);
+			$("#slider-label-thumb-count span").text(count);
 		});
+
 
 	/**
 	 * @TODO Correct max value when exact
@@ -58,15 +67,6 @@ $(function(){
 	});
 
 
-	$("body").bind("indi-thumbs-updated", function(){
-		var ubb = '';
-		$indiThumbs.children(":visible").each(function(i, el){
-			ubb += $(el).attr('data-ubb');
-		});
-		$('#thumbs-ubb').val(ubb);
-	});
-
-
 	$("#individual-thumbs").sortable({
 		opacity: 0.5,
 		update: function(event, ui){
@@ -86,10 +86,10 @@ $(function(){
 			$indiThumbs
 				.find("li").show().end()
 				.find("li:gt(" + thumbsToShow + ")").hide();
-			$("body").trigger("indi-thumbs-updated");
-			$("#slider-label-thumb-count span").text(thumbsToShow + 1);
+			$("body").trigger("indi-thumbs-updated", thumbsToShow+1);
 		}
 	});
+	$("body").trigger('indi-thumbs-updated', totalThumbs);
 
 	$("#thumbs-ubb").on("click", function(){
 		$(this).get(0).select();

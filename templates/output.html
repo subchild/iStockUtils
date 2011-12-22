@@ -22,7 +22,7 @@
 			</ul>
 		</div>
 		<textarea id="lightbox-ubb"></textarea>
-		<p>Replace <b>IMAGESRC</b> with the URL of the saved graphic.</p>
+		<div>Replace <b>IMAGESRC</b> with the URL of the saved graphic.</div>
 		<!-- <button id="generate-image">Generate Image</button> -->
 	</div>
 
@@ -52,6 +52,8 @@
 	</div>
 {% endblock %}
 {% block script %}
+	<script src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
+	<script src="http://html2canvas.hertzen.com/build/jquery.plugin.html2canvas.js"></script>
 	<script src="{{ url_for('static', filename='output.js') }}"></script>
 {% endblock %}
 

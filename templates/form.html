@@ -4,13 +4,23 @@
 		<label for="lightbox-id">Lightbox Id:</label>
 		<input id="lightbox-id" name="lightbox-id">
 		<button>Submit</button>
-		<p>
-			Drop in a valid iStockphoto lightbox id and watch what happens.<br/> 
-			Here are some to get you going:<br/>
-			<a href="/output/11329018">11329018</a>, <a href="/output/11260736">11260736</a>, 
-			<a href="/output/1936426">1936426</a>, <a href="/output/2967389">2967389</a>
+		<p id="lightbox-eg">
+			Ex: <a href="/output/11260736">11260736</a>, 
+				<a href="/output/11329018">11329018</a>,  
+				<a href="/output/1936426">1936426</a>, 
+				<a href="/output/2967389">2967389</a>
 		</p>
 	</form>
+	<p class="intro">
+		iStockutils is designed to help <a href="http:/www.istockphoto.com/" target="_blank">iStockphoto</a> 
+		contributors generate lightbox promo images and UBB code displaying them as well as 
+		related photos on the detail pages such as 
+		<a target="_blank" href="http://www.istockphoto.com/stock-photo-6037308-brooklyn.php?st=7c3bb19">this one</a>. 
+	</p>
+	<p class="intro">
+		This is by no means complete or bug free. There are a number of planned features and 
+		other tools, but you can use it as-is for now.
+	</p>
 {% endblock %}
 {% block script %}
 <script>

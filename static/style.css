@@ -2,7 +2,7 @@ body {
 	font-family: helvetica neue,arial;
 	font-size: 70%;
 	color: #333; 
-	margin: 0;
+	margin: 0 0 2em 0;
 }
 
 a {
@@ -22,6 +22,21 @@ img {
 	background: -ms-linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(190,190,190,1) 100%); /* IE10+ */
 	background: linear-gradient(top,  rgba(220,220,220,1) 0%,rgba(190,190,190,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdcdc', endColorstr='#bebebe',GradientType=0 ); /* IE6-9 */
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	background-color: #000;
+	width: 100%;
+	opacity: 0.8;
+}
+
+#footer div {
+	padding: 5px 10px;
+	text-align: center;
+	font: 1.2em rokkitt;
+	color: #999;
 }
 
 #logo {
@@ -56,6 +71,7 @@ h1 {
 	font: 2.5em rokkitt;
 	color: #369;
 	margin-right: 0.2em;
+	margin-bottom: 1em;
 }
 
 #lightbox-form input {
@@ -86,10 +102,12 @@ h1 {
 	cursor: pointer;	
 }
 
-#lightbox-form p {
-	font: 1.3em/1.4em rokkitt;
-	color: #999;
+#content p {
+	margin: 1em auto;
 	text-align: center;
+	width: 465px; 
+	font: 1.4em rokkitt;
+	color: #999;
 }
 
 .col {

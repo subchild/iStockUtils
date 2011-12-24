@@ -1,19 +1,22 @@
 $(function(){
 	var $lightboxThumbs = $("#lightbox-thumbs"),
-		totalThumbs     = $lightboxThumbs.find('li').size(),
 		thumbsPerRow    = 5,
-		lightboxRows    = Math.floor(totalThumbs/thumbsPerRow),
-		lightboxStep    = 100/lightboxRows,
-
-		$indiThumbs = $("#individual-thumbs"),
-		thumbsStep  = 100/totalThumbs,
-
+		totalThumbs,
+		lightboxRows,
+		
+		$indiThumbs     = $("#individual-thumbs"),
 		lightboxId      = $("#lightbox").attr("data-lightbox-id"),
 		lightboxUrlRoot = "http://istockphoto.com/search/lightbox/";
-	
+
+
+	totalThumbs  = $lightboxThumbs.find('li').size(),
+	lightboxRows = Math.ceil(totalThumbs/thumbsPerRow),
+	exactRows    = totalThumbs % thumbsPerRow;
+
 	$lightboxThumbs.sortable({
 		opacity: 0.5	
 	});
+
 
 	$("body")
 		.bind("slider-lightbox-updated", function(event, count){
@@ -33,18 +36,20 @@ $(function(){
 	 * @TODO Correct max value when exact
 	 */
 	$("#slider-lightbox-rows").slider({
-		step  : lightboxStep, 
-		value : lightboxRows*lightboxStep,
-		stop  : function(event, ui){
-			var rowsToShow   = ui.value/lightboxStep,
-				thumbsToShow = (rowsToShow*thumbsPerRow) + thumbsPerRow-1;
+		min     : 1,
+		max     : lightboxRows,
+		value   : lightboxRows,
+		animate : true,
+		stop    : function(event, ui){
+			var rowsToShow   = ui.value,
+				thumbsToShow = ((rowsToShow-1)*thumbsPerRow) + thumbsPerRow-1;
 			$lightboxThumbs
 				.find("li").show().end()
 				.find("li:gt(" + thumbsToShow + ")").hide();
-			$("body").trigger('slider-lightbox-updated', rowsToShow+1);
+			$("body").trigger('slider-lightbox-updated', rowsToShow);
 		}
 	});
-	$("body").trigger('slider-lightbox-updated', lightboxRows+1);
+	$("body").trigger('slider-lightbox-updated', lightboxRows);
 
 
 	$("#lightbox-ubb")
@@ -61,9 +66,7 @@ $(function(){
 	 */
 	$("#generate-image").on("click", function(){
 		$("#lightbox").html2canvas({renderViewport:'true'});
-		setTimeout(function(){
-			console.log($("canvas")[0].toDataURL());
-		}, 3000);
+		setTimeout(function(){ console.log($("canvas")[0].toDataURL()); }, 3000);
 	});
 
 
@@ -74,22 +77,26 @@ $(function(){
 		}
 	});
 
+
 	/**
 	 * @TODO Prevent zero
 	 * @TODO Fix largest value
 	 */
 	$("#slider-thumb-count").slider({
-		step  : thumbsStep,
-		value : totalThumbs*thumbsStep, 
-		stop  : function(event, ui){
-			var thumbsToShow = Math.floor(ui.value/thumbsStep); 
+		min     : 1,
+		max     : totalThumbs,
+		value   : totalThumbs, 
+		animate : true,
+		stop    : function(event, ui){
+			var thumbsToShow = ui.value; 
 			$indiThumbs
 				.find("li").show().end()
-				.find("li:gt(" + thumbsToShow + ")").hide();
-			$("body").trigger("indi-thumbs-updated", thumbsToShow+1);
+				.find("li:gt(" + (thumbsToShow-1) + ")").hide();
+			$("body").trigger("indi-thumbs-updated", thumbsToShow);
 		}
 	});
 	$("body").trigger('indi-thumbs-updated', totalThumbs);
+
 
 	$("#thumbs-ubb").on("click", function(){
 		$(this).get(0).select();

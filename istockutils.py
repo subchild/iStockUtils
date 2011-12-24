@@ -1,10 +1,11 @@
 #!/usr/bin/python
 
-import urllib, re
+import urllib, re, logging, sys, os
 from flask import Flask, render_template, send_from_directory
 from Image import Image
 
 app = Flask(__name__)
+logging.basicConfig(stream=sys.stderr)
 
 def get_lightbox_source(id):
 	'''Returns source of iStockphoto's lightbox page for passed id'''
@@ -14,13 +15,13 @@ def get_lightbox_source(id):
 	return file_contents
 
 
-@app.route("/favicon.ico")
+@app.route('/favicon.ico')
 def favicon():
 	return send_from_directory(os.path.join(app.root_path, 'static'),
 								'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
-@app.route("/")
+@app.route('/')
 def index():
 	'''Renders index page with input form'''
 	return render_template('form.html')
@@ -37,7 +38,7 @@ def output(id):
 	if match:
 		name = match.group(1)
 	else:
-		name = "Lightbox Name Goes Here"
+		name = 'Lightbox Name Goes Here'
 	ids = exp_imgs.findall(file_contents)
 	ids = list(set(ids)) # dedupe
 	for image_id in ids:

@@ -148,6 +148,10 @@ ul li {
 	margin: 0;
 }
 
+ul li, ul li a {
+	cursor: move;
+}
+
 .slider-label {
 	font: 1.5em rokkitt;
 	margin-bottom: 0.5em;

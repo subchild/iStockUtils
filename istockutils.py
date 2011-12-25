@@ -3,22 +3,26 @@
 import urllib, re, logging, sys, os
 from flask import Flask, render_template, send_from_directory
 from Image import Image
+from BeautifulSoup import BeautifulSoup
 
 app = Flask(__name__)
 logging.basicConfig(stream=sys.stderr)
 
 def get_lightbox_source(id):
 	'''Returns source of iStockphoto's lightbox page for passed id'''
-	file_handle = urllib.urlopen('http://www.istockphoto.com/search/lightbox/' + id)
+	file_handle   = urllib.urlopen('http://www.istockphoto.com/search/lightbox/' + id)
 	file_contents = file_handle.read()
 	file_handle.close()
+	logging.error(file_contents[0:500])
 	return file_contents
 
 
 @app.route('/favicon.ico')
 def favicon():
-	return send_from_directory(os.path.join(app.root_path, 'static'),
-								'favicon.ico', mimetype='image/vnd.microsoft.icon')
+	return send_from_directory(
+				os.path.join(app.root_path, 'static'),
+				'favicon.ico', 
+				mimetype='image/vnd.microsoft.icon')
 
 
 @app.route('/')
@@ -29,16 +33,24 @@ def index():
 
 @app.route('/output/<id>')
 def output(id):
-	'''Renders output page with lightbox image and related photos'''
-	ubbstr = ''
-	thumbs = []
+	'''Renders output page with lightbox image and related photos. 
+	It appears that the Lightbox title is absent from the page source,
+	so hardcoding flat title for now. Plan is to make this editable on page'''
 	file_contents = get_lightbox_source(id)
-	exp_imgs = re.compile(r"file_thumbview_approve\\\/(\d+)\\\/")
-	match = re.search(r"\| Lightbox: ([\b\w\s\b]+) ", file_contents)
-	if match:
-		name = match.group(1)
-	else:
-		name = 'Lightbox Name Goes Here'
+	exp_imgs      = re.compile(r"file_thumbview_approve\\\/(\d+)\\\/")
+	soup          = BeautifulSoup(file_contents)
+	title         = soup.findAll(id='searchTitleCaption')
+#	matches       = re.search(r'\| Lightbox: ([\b\w\s\b]+) ', file_contents)
+	ubbstr        = ''
+	thumbs        = []
+
+	logging.error('TITLE IS: ' + title[0].string)
+
+#	if matches:
+#		name = matches.group(1)
+#	else:
+#		name = soup.title #'Lightbox Name Goes Here'
+
 	ids = exp_imgs.findall(file_contents)
 	ids = list(set(ids)) # dedupe
 	for image_id in ids:
@@ -49,16 +61,16 @@ def output(id):
 			'src' : i.get_thumb_src(), 
 			'ubb' : i.get_ubb_string()
 		})
-	return render_template('output.html', id=id, name=name, thumbs=thumbs, ubbstring=ubbstr)
+	return render_template('output.html', id=id, name='Lightbox', thumbs=thumbs, ubbstring=ubbstr)
 
 
 @app.route('/get/lightbox/<id>')
 def get_lightbox(id):
 	'''Proxy service for exposing istock lightbox html to local origin for ajax requests'''
-	file_contents = get_lightbox_src(id)
+	file_contents = get_lightbox_source(id)
 	exp = re.compile(r"file_thumbview_approve\\\/(\d+)\\\/")
 	img_ids = exp.findall(file_contents)
-	return img_ids[2]
+	return (', ').join(img_ids)
 
 
 if __name__ == '__main__':

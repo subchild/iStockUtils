@@ -59,6 +59,11 @@ $(function(){
 		});
 
 
+	$("#lightbox h3 input").on("keypress", function(e){
+		if (e.keyCode==13){ $(this).blur(); }
+	});
+
+
 	/**	
 	 * @TODO If enabling this:
 	 * - Make a service for converting to png (potentially even serving it)
@@ -101,5 +106,6 @@ $(function(){
 	$("#thumbs-ubb").on("click", function(){
 		$(this).get(0).select();
 	});
+
 });
 

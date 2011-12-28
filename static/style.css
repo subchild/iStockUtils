@@ -33,17 +33,25 @@ img {
 }
 
 #footer div {
-	padding: 5px 10px;
+	padding: 10px;
 	text-align: center;
 	font: 1.2em rokkitt;
 	color: #999;
 }
 
+#footer div .ttw-button {
+	margin-left: 10px;
+}
+
 #logo {
 	font: 10em/0.6em Ultra;
 	letter-spacing: -0.04em;
-	color: #fff;
 	text-align: center;
+}
+
+#logo a {
+	color: #fff;
+	text-decoration: none;
 }
 
 #content {

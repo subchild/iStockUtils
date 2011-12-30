@@ -3,7 +3,7 @@
 import urllib, re, logging, sys, os
 from flask import Flask, render_template, send_from_directory
 from Image import Image
-from BeautifulSoup import BeautifulSoup
+# from BeautifulSoup import BeautifulSoup
 
 app = Flask(__name__)
 logging.basicConfig(stream=sys.stderr)
@@ -34,17 +34,15 @@ def index():
 @app.route('/output/<id>')
 def output(id):
 	'''Renders output page with lightbox image and related photos. 
-	It appears that the Lightbox title is absent from the page source,
-	so hardcoding flat title for now. Plan is to make this editable on page'''
+	Lightbox title is absent from the page source unless logged into 
+	iStockphoto so making title flat and editable on page'''
 	file_contents = get_lightbox_source(id)
 	exp_imgs      = re.compile(r"file_thumbview_approve\\\/(\d+)\\\/")
-	soup          = BeautifulSoup(file_contents)
-	title         = soup.findAll(id='searchTitleCaption')
+#	soup          = BeautifulSoup(file_contents)
+#	title         = soup.findAll(id='searchTitleCaption')
 #	matches       = re.search(r'\| Lightbox: ([\b\w\s\b]+) ', file_contents)
 	ubbstr        = ''
 	thumbs        = []
-
-	logging.error('TITLE IS: ' + title[0].string)
 
 #	if matches:
 #		name = matches.group(1)

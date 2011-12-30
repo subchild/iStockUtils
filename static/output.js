@@ -1,3 +1,6 @@
+/**
+ *
+ */
 $(function(){
 	var $lightboxThumbs = $("#lightbox-thumbs"),
 		thumbsPerRow    = 5,
@@ -32,9 +35,6 @@ $(function(){
 		});
 
 
-	/**
-	 * @TODO Correct max value when exact
-	 */
 	$("#slider-lightbox-rows").slider({
 		min     : 1,
 		max     : lightboxRows,
@@ -83,10 +83,6 @@ $(function(){
 	});
 
 
-	/**
-	 * @TODO Prevent zero
-	 * @TODO Fix largest value
-	 */
 	$("#slider-thumb-count").slider({
 		min     : 1,
 		max     : totalThumbs,

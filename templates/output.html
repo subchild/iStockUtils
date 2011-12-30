@@ -14,7 +14,7 @@
 			<div id="slider-lightbox-rows"></div>	
 		</div>
 		<div id="lightbox" data-lightbox-id="{{ id }}">
-			<h3><input type="text" value="{{ name }}"/></h3>
+			<h3><input type="text" value="{{ name }} [click to edit]"/></h3>
 			<ul id="lightbox-thumbs">
 			{% for thumb in thumbs %}
 				<li data-id="{{ thumb.id }}" data-ubb="{{ thumb.ubb }}"><div style="background-image:url({{ thumb.src }});"></div></li>

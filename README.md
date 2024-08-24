@@ -13,5 +13,3 @@ also create the UBB code for related images by hand. This tool simplifies both.
 This is by no means complete or bug free. There are a number of planned features and other toools,
 but you can use it as-is for now.
 
-Check it out at http://www.istockutils.com
-
